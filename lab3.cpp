@@ -10,24 +10,24 @@ void mayorMenor(int , int);
 void printArray(int [], int);
 
 int main(int argc, char const *argv[]){
-	int size=10, array[size], opcion=menu(), vecesJuego=1, currentTry, numIntentos;
-	srand(time(NULL));
-	int numRand=rand()%1001-500;
+	int size=10, array[size], opcion=menu(), vecesJuego=0, currentTry, numIntentos;
 	if (opcion==1){
-		while(vecesJuego<=10){
+		while(vecesJuego<2){
+			srand(time(NULL));
+			int numRand=rand()%1001-500;
 			for(int i=0;i<1001;i++){
-			cout<<"Intento #"<<i+1<<": ";
-			cin>> currentTry;
-			numIntentos++;
-			if(currentTry==numRand){
-				cout<<"Este es el numero!!!"<<endl;
-				vecesJuego++;
-				array[vecesJuego-1]=numIntentos;
-				numIntentos=0;
-				cout<<endl;
-				break;					
-			}else
-				mayorMenor(currentTry,numRand); 
+				cout<<"Intento #"<<i+1<<": ";
+				cin>> currentTry;
+				numIntentos++;
+				if(currentTry==numRand){
+					cout<<"Este es el numero!!!"<<endl;					
+					array[vecesJuego]=numIntentos;
+					vecesJuego++;
+					numIntentos=0;
+					cout<<endl;
+					break;					
+				}else
+					mayorMenor(currentTry,numRand); 
 			}
 		}
 		cout<<"-----------------------------"<<endl;
