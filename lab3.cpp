@@ -10,28 +10,42 @@ void mayorMenor(int , int);
 void printArray(int [], int);
 
 int main(int argc, char const *argv[]){
-	int size=10, array[size], opcion=menu(), vecesJuego=0, currentTry, numIntentos;
+	int size=10, opcion=menu(), currentTry, numIntentos, resp=1;
+	int array[size]={1000,1000,1000,1000,1000,1000,1000,1000,1000,1000};
 	if (opcion==1){
-		while(vecesJuego<2){
+		while(resp==1){
 			srand(time(NULL));
 			int numRand=rand()%1001-500;
-			for(int i=0;i<1001;i++){
-				cout<<"Intento #"<<i+1<<": ";
+			do{
+				cout<<numRand<<endl;
+				cout<<"Ingrese el numero: ";
 				cin>> currentTry;
 				numIntentos++;
-				if(currentTry==numRand){
-					cout<<"Este es el numero!!!"<<endl;					
-					array[vecesJuego]=numIntentos;
-					vecesJuego++;
-					numIntentos=0;
+				if (currentTry==numRand){
+					cout<<"Este es el numero!"<<endl;
 					cout<<endl;
-					break;					
-				}else
-					mayorMenor(currentTry,numRand); 
+				}
+				mayorMenor(currentTry,numRand);
+			} while (currentTry!=numRand);
+			int bandera=1, reemplazo;
+			for (int i = 0; (i < size)&&bandera==1; ++i){
+				if (numIntentos<array[i]||numIntentos==array[i]){
+						reemplazo=array[i];
+						array[i]=numIntentos;
+						array[i+1]=reemplazo;
+						bandera=0;
+				} 	
 			}
+			printArray(array, size);
+			numIntentos=0;
+			cout<<"Quiere seguir jugando? [1/2]: ";
+			cin>>resp;
+			cout<<endl;
 		}
-		cout<<"-----------------------------"<<endl;
-		printArray(array, size);
+		cout<<"Gracias por jugar!"<<endl;
+		cout<<"Se borraran los numeros de la tabla"<<endl;
+		cout<<endl;
+		opcion=menu();
 	}else if (opcion==2){
 		
 	}else
